@@ -6,8 +6,61 @@ import {
   Headphones 
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import ProductCard from "../components/product/ProductCard";
+import type { Product } from "../types";
 
 const Home = () => {
+  const featuredProducts: Product[] = [
+    {
+      id: 1,
+      name: "Sony WH-1000XM5 Wireless Noise Cancelling",
+      brand: "Sony",
+      category: "Electronics",
+      price: 319,
+      oldPrice: 399,
+      image: "🎧",
+      rating: 4.9,
+      reviewCount: 2148,
+      inStock: true,
+      discount: 20
+    },
+    {
+      id: 2,
+      name: "Apple Watch Series 9 GPS 45mm",
+      brand: "Apple",
+      category: "Wearables",
+      price: 399,
+      image: "⌚",
+      rating: 4.8,
+      reviewCount: 5400,
+      inStock: true
+    },
+    {
+      id: 3,
+      name: "Nike Air Max 270 React",
+      brand: "Nike",
+      category: "Footwear",
+      price: 149,
+      oldPrice: 180,
+      image: "👟",
+      rating: 4.6,
+      reviewCount: 873,
+      inStock: true,
+      discount: 17
+    },
+    {
+      id: 4,
+      name: "iPhone 15 Pro Max 256GB",
+      brand: "Apple",
+      category: "Smartphones",
+      price: 1199,
+      image: "📱",
+      rating: 4.9,
+      reviewCount: 12000,
+      inStock: true
+    }
+  ];
+
   return (
     <div className="bg-[#F1F0FF]">
       {/* Hero Section */}
@@ -144,31 +197,8 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Product Card */}
-            {[1,2,3,4].map((_, i) => (
-              <div key={i} className="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-[#AFA9EC] transition-all group">
-                <div className="h-64 bg-[#EEEDFE] flex items-center justify-center text-8xl relative">
-                  {i === 0 && <div className="absolute top-4 left-4 bg-[#534AB7] text-white text-xs px-3 py-1 rounded-lg">−20%</div>}
-                  🎧
-                  <button className="absolute top-4 right-4 bg-white p-2 rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-all">
-                    ♡
-                  </button>
-                </div>
-                <div className="p-6">
-                  <div className="text-xs uppercase tracking-widest text-gray-500">Electronics</div>
-                  <h3 className="font-semibold mt-2 line-clamp-2">Sony WH-1000XM5 Wireless Noise Cancelling</h3>
-                  <div className="flex items-center gap-1 mt-3 text-amber-400">★★★★★</div>
-                  <div className="mt-4 flex justify-between itms-end">
-                    <div>
-                      <span className="text-2xl font-semibold text-[#534AB7]">$319</span>
-                      {i === 0 && <span className="line-through text-gray-400 ml-2">$399</span>}
-                    </div>
-                    <button className="bg-[#534AB7] text-white px-6 py-2 rounded-2xl text-sm font-medium hover:bg-[#4338A0]">
-                      Add
-                    </button>
-                  </div>
-                </div>
-              </div>
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
@@ -199,7 +229,7 @@ const Home = () => {
 
             {/* Side Cards */}
             <div className="space-y-8">
-              {[ 
+              {[
                 { name: "PS5 Console", price: "$499", emoji: "🎮" },
                 { name: "Canon EOS R50", price: "$699", emoji: "📷" }
               ].map((item, i) => (
