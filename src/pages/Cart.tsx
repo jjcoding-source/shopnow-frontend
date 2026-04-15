@@ -6,8 +6,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
 
 const Cart = () => {
   const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1); // 1=Cart, 2=Address, 3=Review, 4=Payment, 5=Confirmation

@@ -9,8 +9,6 @@ import {
   ChevronRight 
 } from "lucide-react";
 import { useState } from "react";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
 
 const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
