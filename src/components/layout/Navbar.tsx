@@ -1,9 +1,11 @@
 import { ShoppingCart, Heart, User, Search } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useCartStore } from "../../store/cartStore";
 
 const Navbar = () => {
-  const [cartCount] = useState(3); 
+  const { getTotalItems } = useCartStore();
+  const totalItems = getTotalItems();
+
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
@@ -25,28 +27,49 @@ const Navbar = () => {
 
         {/* Navigation Links (Desktop) */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[#3C3489]">
-          <Link to="/" className="hover:text-[#534AB7] transition-colors">Home</Link>
-          <Link to="/shop" className="hover:text-[#534AB7] transition-colors">Shop</Link>
-          <Link to="/categories" className="hover:text-[#534AB7] transition-colors">Categories</Link>
-          <Link to="/deals" className="hover:text-[#534AB7] transition-colors">Deals</Link>
+          <Link to="/" className="hover:text-[#534AB7] transition-colors">
+            Home
+          </Link>
+          <Link to="/shop" className="hover:text-[#534AB7] transition-colors">
+            Shop
+          </Link>
+          <Link
+            to="/categories"
+            className="hover:text-[#534AB7] transition-colors"
+          >
+            Categories
+          </Link>
+          <Link to="/deals" className="hover:text-[#534AB7] transition-colors">
+            Deals
+          </Link>
         </div>
 
         {/* Right Side Icons */}
         <div className="flex items-center gap-6">
-          <Link to="/wishlist" className="relative text-[#3C3489] hover:text-[#534AB7] transition-colors">
+          <Link
+            to="/wishlist"
+            className="relative text-[#3C3489] hover:text-[#534AB7] transition-colors"
+          >
             <Heart className="w-5 h-5" />
           </Link>
 
-          <Link to="/cart" className="relative text-[#3C3489] hover:text-[#534AB7] transition-colors">
+          {/* Cart Icon */}
+          <Link
+            to="/cart"
+            className="relative text-[#3C3489] hover:text-[#534AB7] transition-colors"
+          >
             <ShoppingCart className="w-5 h-5" />
-            {cartCount > 0 && (
+            {totalItems > 0 && (
               <div className="absolute -top-1 -right-1 bg-[#534AB7] text-white text-[10px] font-medium w-5 h-5 flex items-center justify-center rounded-full">
-                {cartCount}
+                {totalItems}
               </div>
             )}
           </Link>
 
-          <Link to="/profile" className="w-8 h-8 bg-[#EEEDFE] rounded-full flex items-center justify-center text-[#534AB7] font-medium text-sm hover:bg-[#534AB7] hover:text-white transition-all">
+          <Link
+            to="/profile"
+            className="w-8 h-8 bg-[#EEEDFE] rounded-full flex items-center justify-center text-[#534AB7] font-medium text-sm hover:bg-[#534AB7] hover:text-white transition-all"
+          >
             JD
           </Link>
 
