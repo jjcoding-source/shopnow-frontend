@@ -1,18 +1,9 @@
 import { create } from 'zustand';
-
-type CartItem = {
-  id: number;
-  name: string;
-  brand: string;
-  price: number;
-  quantity: number;
-  color?: string;
-  image: string;
-};
+import type { CartItem } from '../types';
 
 type CartStore = {
   items: CartItem[];
-  addToCart: (product: Omit<CartItem, 'quantity'>) => void;
+  addToCart: (product: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
   clearCart: () => void;
@@ -29,11 +20,15 @@ export const useCartStore = create<CartStore>((set, get) => ({
       if (existing) {
         return {
           items: state.items.map(item =>
-            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            item.id === product.id 
+              ? { ...item, quantity: item.quantity + (product.quantity || 1) } 
+              : item
           )
         };
       }
-      return { items: [...state.items, { ...product, quantity: 1 }] };
+      return { 
+        items: [...state.items, { ...product, quantity: product.quantity || 1 }] 
+      };
     });
   },
 
